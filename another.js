@@ -1,5 +1,5 @@
-console.log("hello world !")
-console.log("this file is linked but still code is not working dont know why this is happening ")
+console.log("hello world here I m coding in javascript but it is not working for almost 6 days so I need your help anyone is there who can help me in javascript so i can run my code properly i will be very greatful to you thanking you ")
+
 const questions = [
     {
         question: "Which is the largest Animal ?",
@@ -54,7 +54,6 @@ function startQuiz() {
 }
 
 function showQuestion(){
-    resetState();
     let currentQuestion=questions[currentQuestionIndex];
     let questionNo=currentQuestionIndex + 1;
     questionElement.innerHTML=questionNo + "." +currentQuestion.question;
@@ -65,42 +64,8 @@ function showQuestion(){
         button.innerHTML=answer.text;
         button.classList.add("btn");
         answerButton.appendChild(button);
-
-        if(answers.correct){
-            button.dataset.correct=answers.correct;
-
-        }
-        button.addEventListener("click",selectAnswer)
     });
 }
-
-function resetState(){
-    nextButton.style.display="none";
-    while(answerButton){
-        answerButton.removeChild(answerButton.firstChild);
-    }
-}
-
-function selectAnswer(e){
-    const selectedBtn=e.target;
-    const iscorrect=selectedBtn.dataset.correct==="true";
-    if(iscorrect){
-        selectedBtn.classList.add("correct");
-    }
-    else{
-        selectedBtn.classList.add("incorrect");
-    }
-
-    Array.from(answerButton.children).forEach(button=>{
-        if(button.dataset.correct ==="true"){
-            button.add.classList="correct";
-        }
-        button.disabled=true;
-
-    });
-    nextButton.style.display='block';
-}
-
 startQuiz();
 
 console.log("this is working here");

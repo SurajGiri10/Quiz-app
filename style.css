@@ -69,3 +69,11 @@ body{
 #next_button:hover{
     background-color: darkgreen;
 }
+
+
+.correct{
+    background-color: green;
+}
+.incorrect{
+    background-color: red;
+}
