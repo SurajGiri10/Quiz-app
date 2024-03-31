@@ -1,5 +1,3 @@
-console.log("hello world !")
-console.log("this file is linked but still code is not working dont know why this is happening ")
 const questions = [
     {
         question: "Which is the largest Animal ?",
@@ -46,6 +44,14 @@ const nextButton = document.getElementById("next-button");
 let currentQuestionIndex = 0;
 let score = 0;
 
+nextButton.addEventListener("click", () => {
+    if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+    } else {
+        startQuiz();
+    }
+});
+
 function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
@@ -53,81 +59,69 @@ function startQuiz() {
     showQuestion();
 }
 
-function showQuestion(){
+function showQuestion() {
     resetState();
-    let currentQuestion=questions[currentQuestionIndex];
-    let questionNo=currentQuestionIndex + 1;
-    questionElement.innerHTML=questionNo + "." +currentQuestion.question;
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + "." + currentQuestion.question;
 
-
-    currentQuestion.answers.forEach(answer=>{
-        const button=document.createElement("button");
-        button.innerHTML=answer.text;
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
         button.classList.add("btn");
         answerButton.appendChild(button);
 
-        if(answers.correct){
-            button.dataset.correct=answers.correct;
-
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
         }
-        button.addEventListener("click",selectAnswer)
+        button.addEventListener("click", selectAnswer)
     });
 }
 
-function resetState(){
-    nextButton.style.display="none";
-    while(answerButton){
+function resetState() {
+    nextButton.style.display = "none";
+    while (answerButton.firstChild) {
         answerButton.removeChild(answerButton.firstChild);
     }
 }
 
-function selectAnswer(e){
-    const selectedBtn=e.target;
-    const iscorrect=selectedBtn.dataset.correct==="true";
-    if(iscorrect){
+function selectAnswer(e) {
+    const selectedBtn = e.target;
+    const iscorrect = selectedBtn.dataset.correct === "true";
+    if (iscorrect) {
         selectedBtn.classList.add("correct");
-    }
-    else{
+    } else {
         selectedBtn.classList.add("incorrect");
     }
 
-    Array.from(answerButton.children).forEach(button=>{
-        if(button.dataset.correct ==="true"){
-            button.add.classList="correct";
+    Array.from(answerButton.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
             score++;
         }
-        button.disabled=true;
-
+        button.disabled = true;
     });
-    nextButton.style.display='block';
-}
-function showScore(){
-    resetState();
-    questionElement.innerHTML=`you have scored ${score} out of ${questions.length}!`
-    nextButton.innerHTML="play again"
-    nextButton.style.display="block"
+    nextButton.style.display = 'block';
 }
 
-function handleNextButton(){
+function showScore() {
+    resetState();
+    questionElement.innerHTML = `you have scored ${score} out of ${questions.length}!`
+    nextButton.innerHTML = "play again"
+    nextButton.style.display = "block"
+}
+
+function handleNextButton() {
     currentQuestionIndex++;
-    if(currentQuestionIndex<questions.length){
+    if (currentQuestionIndex < questions.length) {
         showQuestion();
-    }
-    else{
+    } else {
         showScore()
     }
 }
 
-
-nextButton.addEventListener("click",()=>{
-    if(currentQuestionIndex<questions.length){
-        handleNextButton();
-    }
-    else{
-        startQuiz();
-    }
-});
-
 startQuiz();
 
 console.log("this is working here");
+console.log("hello world !");
+console.log("this file is linked but still code is not working dont know why this is happening ");
